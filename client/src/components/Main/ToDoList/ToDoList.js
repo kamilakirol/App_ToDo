@@ -12,7 +12,7 @@ const ToDoList = ({items, setItems}) => {
                     {items.length === 0 ? <p className='toDoList_box_items_info'>No todos here</p> :
                         items.map((item, index) => {
                                 return (
-                                    <ToDoListItem key={item.id} item={item} index={index}
+                                    <ToDoListItem key={item.name} item={item} index={index}
                                                   items={items} setItems={setItems}/>
                                 )
                             }

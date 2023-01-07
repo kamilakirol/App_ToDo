@@ -2,9 +2,9 @@ import React from 'react';
 
 const ToDoListItem = ({items, setItems, item, index}) => {
 
-    const handleChange = (id) => {
+    const handleChange = (name) => {
         setItems(prevItems => prevItems.map(item => {
-            if (item.id === id) {
+            if (item.name === name) {
                 return {
                     ...item,
                     done: !item.done
@@ -24,11 +24,11 @@ const ToDoListItem = ({items, setItems, item, index}) => {
             )
     };
 
-    const handleEdit = (id) => {
+    const handleEdit = (name) => {
         setItems(prevItems => prevItems.map(item => {
             return {
                 ...item,
-                edit: item.id === id ? !item.edit : false
+                edit: item.name === name ? !item.edit : false
             }
         }))
     }
@@ -43,10 +43,10 @@ const ToDoListItem = ({items, setItems, item, index}) => {
                     type='checkbox'
                     name='check'
                     checked={item.done}
-                    onChange={() => handleChange(item.id)}
+                    onChange={() => handleChange(item.name)}
                 ></input>
                 <i className={!item.edit ? 'fa fa-pencil-square-o' : 'fa fa-window-close'} aria-hidden="true"
-                   onClick={() => handleEdit(item.id)}></i>
+                   onClick={() => handleEdit(item.name)}></i>
                 <i className="fa fa-trash" aria-hidden="true" onClick={() => handleSplice(index)}></i>
             </div>
         </div>
