@@ -1,0 +1,14 @@
+@import "generic/reset";
+
+@import 'settings/colors';
+@import 'settings/fonts';
+@import 'settings/button';
+@import 'settings/breakpoints';
+@import 'settings/base';
+
+@import '../components/Header/header';
+@import '../components/Main/AddNewTask/addNewTask';
+@import '../components/Main/ToDoList/toDoList';
+@import '../components/Main/ToDoListItem/toDoListItem';
+@import '../components/Main/DeleteTask/deletetask';
+@import '../components/Footer/footer';

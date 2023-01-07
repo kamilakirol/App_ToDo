@@ -1,0 +1,34 @@
+.toDoListItem {
+  margin-top: 5px;
+  padding: 6px;
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid $main-color;
+  border-radius: 8px;
+
+  &_task {
+    &_title {
+      text-decoration: none;
+    }
+  }
+
+  &_btns {
+    .fa {
+      color: $main-color;
+      cursor: pointer;
+      font-size: 0.9em;
+    }
+
+    .fa-pencil-square-o {
+      margin: 0 5px;
+    }
+
+    .fa-window-close {
+      margin: 0 5px;
+    }
+  }
+}
+
+.done {
+  text-decoration: line-through;
+}

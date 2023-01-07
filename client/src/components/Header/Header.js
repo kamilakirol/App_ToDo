@@ -2,10 +2,8 @@ import React from 'react';
 
 const Header = () => {
     return (
-        <header>
-            <div className='container header_container'>
+        <header className='header'>
                 <h1 className='header_title'>ToDo App</h1>
-            </div>
         </header>
     );
 };

@@ -1,0 +1,26 @@
+.addNewTask {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid $main-color;
+  border-radius: 8px;
+
+  &_form {
+    display: flex;
+    flex-direction: column;
+
+    &_input {
+      border: 1px solid $main-color;
+      padding: 5px 10px;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      font-family: $font-roboto;
+    }
+
+    &_errors {
+      margin-top: 10px;
+      color: red;
+      text-align: center;
+    }
+
+  }
+}
