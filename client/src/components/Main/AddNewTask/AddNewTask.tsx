@@ -1,19 +1,34 @@
-import React, {useEffect, useState} from 'react';
+import React, {
+    ChangeEvent,
+    Dispatch, FormEvent,
+    MutableRefObject,
+    SetStateAction,
+    useEffect,
+    useState
+} from 'react';
+import {Item} from "../../../types";
 
-const getEditedElement = (items) => items.find((item) => item.edit === true);
-const validateName = (items) => items.map(item => item.name);
+type Props = {
+    items: Item[],
+    setItems: Dispatch<SetStateAction<Item[]>>,
+    inputEl: MutableRefObject<HTMLInputElement | null>,
+}
 
-const AddNewTask = ({setItems, items, inputEl}) => {
+
+const getEditedElement = (items: Item[]) => items.find((item) => item.edited);
+const validateName = (items: Item[]) => items.map(item => item.name);
+
+const AddNewTask = ({setItems, items, inputEl}: Props) => {
     const [error, setError] = useState('');
     const [task, setTask] = useState('');
     const editElement = getEditedElement(items);
     const elementNames = validateName(items);
 
-    const handleTaskChange = (e) => {
+    const handleTaskChange = (e: ChangeEvent<HTMLInputElement>) => {
         setTask(e.target.value)
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (task.length === 0) {
             setError('Please add valid todo!')

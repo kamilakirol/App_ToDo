@@ -1,8 +1,16 @@
-import React from 'react';
+import React, {Dispatch, SetStateAction} from 'react';
+import {Item} from "../../../types";
 
-const ToDoListItem = ({items, setItems, item, index}) => {
+type Props = {
+    items: Item[],
+    setItems: Dispatch<SetStateAction<Item[]>>
+    item: Item
+    index: number
+}
 
-    const handleChange = (name) => {
+const ToDoListItem = ({setItems, item, index}: Props) => {
+
+    const handleChange = (name: string) => {
         setItems(prevItems => prevItems.map(item => {
             if (item.name === name) {
                 return {
@@ -14,7 +22,7 @@ const ToDoListItem = ({items, setItems, item, index}) => {
         }))
     }
 
-    const handleSplice = (i) => {
+    const handleSplice = (i: number) => {
         if (index === i)
             setItems(prevItems => {
                     const updatedArray = [...prevItems]
@@ -24,11 +32,11 @@ const ToDoListItem = ({items, setItems, item, index}) => {
             )
     };
 
-    const handleEdit = (name) => {
+    const handleEdit = (name: string) => {
         setItems(prevItems => prevItems.map(item => {
             return {
                 ...item,
-                edit: item.name === name ? !item.edit : false
+                edited: item.name === name ? !item.edited : false
             }
         }))
     }
@@ -45,7 +53,7 @@ const ToDoListItem = ({items, setItems, item, index}) => {
                     checked={item.done}
                     onChange={() => handleChange(item.name)}
                 ></input>
-                <i className={!item.edit ? 'fa fa-pencil-square-o' : 'fa fa-window-close'} aria-hidden="true"
+                <i className={!item.edited ? 'fa fa-pencil-square-o' : 'fa fa-window-close'} aria-hidden="true"
                    onClick={() => handleEdit(item.name)}></i>
                 <i className="fa fa-trash" aria-hidden="true" onClick={() => handleSplice(index)}></i>
             </div>

@@ -1,7 +1,13 @@
-import React from 'react';
+import React, {Dispatch, SetStateAction} from 'react';
 import ToDoListItem from "../ToDoListItem/ToDoListItem";
+import {Item} from "../../../types";
 
-const ToDoList = ({items, setItems}) => {
+type Props = {
+    items: Item[],
+    setItems: Dispatch<SetStateAction<Item[]>>
+}
+
+const ToDoList = ({items, setItems}: Props) => {
 
 
     return (

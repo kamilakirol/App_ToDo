@@ -1,6 +1,11 @@
-import React from 'react';
+import React, {Dispatch, SetStateAction} from 'react';
+import {Item} from "../../../types";
 
-const DeleteTask = ({setItems}) => {
+type Props = {
+    setItems: Dispatch<SetStateAction<Item[]>>
+}
+
+const DeleteTask = ({setItems}: Props) => {
 
     const deleteAllTasks = () => {
         setItems(prevItems => {
@@ -12,7 +17,7 @@ const DeleteTask = ({setItems}) => {
 
     const deleteDoneTask = () => {
         setItems(prevItems => prevItems.filter((e) => {
-                return e.done === false;
+                return !e.done;
             })
         )
     }
