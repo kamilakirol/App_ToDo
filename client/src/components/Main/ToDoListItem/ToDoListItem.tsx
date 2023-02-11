@@ -1,14 +1,17 @@
 import React, {Dispatch, SetStateAction} from 'react';
 import {Item} from "../../../types";
+import {Action} from "../Main";
 
 type Props = {
     items: Item[],
     setItems: Dispatch<SetStateAction<Item[]>>
     item: Item
     index: number
+    state: Item[],
+    dispatch: Dispatch<Action>
 }
 
-const ToDoListItem = ({setItems, item, index}: Props) => {
+const ToDoListItem = ({setItems, item, index, state, dispatch}: Props) => {
 
     const handleChange = (name: string) => {
         setItems(prevItems => prevItems.map(item => {
@@ -23,6 +26,7 @@ const ToDoListItem = ({setItems, item, index}: Props) => {
     }
 
     const handleSplice = (i: number) => {
+        dispatch({type: 'DELETE', name: item.name})
         if (index === i)
             setItems(prevItems => {
                     const updatedArray = [...prevItems]
@@ -33,6 +37,8 @@ const ToDoListItem = ({setItems, item, index}: Props) => {
     };
 
     const handleEdit = (name: string) => {
+        dispatch({type: 'EDIT', name, isEditMode: true})
+
         setItems(prevItems => prevItems.map(item => {
             return {
                 ...item,

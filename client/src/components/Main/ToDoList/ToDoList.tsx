@@ -1,13 +1,16 @@
 import React, {Dispatch, SetStateAction} from 'react';
 import ToDoListItem from "../ToDoListItem/ToDoListItem";
 import {Item} from "../../../types";
+import {Action} from "../Main";
 
 type Props = {
     items: Item[],
-    setItems: Dispatch<SetStateAction<Item[]>>
+    setItems: Dispatch<SetStateAction<Item[]>>,
+    state: Item[],
+    dispatch: Dispatch<Action>
 }
 
-const ToDoList = ({items, setItems}: Props) => {
+const ToDoList = ({items, setItems, state, dispatch}: Props) => {
 
 
     return (
@@ -18,8 +21,15 @@ const ToDoList = ({items, setItems}: Props) => {
                     {items.length === 0 ? <p className='toDoList_box_items_info'>No todos here</p> :
                         items.map((item, index) => {
                                 return (
-                                    <ToDoListItem key={item.name} item={item} index={index}
-                                                  items={items} setItems={setItems}/>
+                                    <ToDoListItem
+                                        key={item.name}
+                                        item={item}
+                                        index={index}
+                                        items={items}
+                                        setItems={setItems}
+                                        state={state}
+                                        dispatch={dispatch}
+                                    />
                                 )
                             }
                         )

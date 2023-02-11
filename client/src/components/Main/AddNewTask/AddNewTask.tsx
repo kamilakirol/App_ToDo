@@ -7,18 +7,20 @@ import React, {
     useState
 } from 'react';
 import {Item} from "../../../types";
+import {Action} from "../Main";
 
 type Props = {
     items: Item[],
     setItems: Dispatch<SetStateAction<Item[]>>,
     inputEl: MutableRefObject<HTMLInputElement | null>,
+    state: Item[],
+    dispatch: Dispatch<Action>
 }
-
 
 const getEditedElement = (items: Item[]) => items.find((item) => item.edited);
 const validateName = (items: Item[]) => items.map(item => item.name);
 
-const AddNewTask = ({setItems, items, inputEl}: Props) => {
+const AddNewTask = ({setItems, items, inputEl, state, dispatch}: Props) => {
     const [error, setError] = useState('');
     const [task, setTask] = useState('');
     const editElement = getEditedElement(items);
@@ -45,11 +47,18 @@ const AddNewTask = ({setItems, items, inputEl}: Props) => {
             return;
         }
 
+        if (editElement) {
+            dispatch({type: 'EDIT', name: task, isEditMode: false})
+        } else {
+            dispatch({type: 'ADD', name: task})
+        }
+
+
         setItems(prevItems => {
             if (editElement) {
                 const updatedItems = [...prevItems]
                 const index = updatedItems.findIndex((item) => item.name === editElement.name);
-                const editedItem = {...editElement, name: task, edit: false};
+                const editedItem = {...editElement, name: task, edited: false};
                 updatedItems.splice(index, 1, editedItem);
                 return updatedItems
             }

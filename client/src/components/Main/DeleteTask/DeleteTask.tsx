@@ -1,11 +1,13 @@
 import React, {Dispatch, SetStateAction} from 'react';
 import {Item} from "../../../types";
+import {Action} from "../Main";
 
 type Props = {
-    setItems: Dispatch<SetStateAction<Item[]>>
+    setItems: Dispatch<SetStateAction<Item[]>>,
+    dispatch: Dispatch<Action>
 }
 
-const DeleteTask = ({setItems}: Props) => {
+const DeleteTask = ({setItems, dispatch}: Props) => {
 
     const deleteAllTasks = () => {
         setItems(prevItems => {
