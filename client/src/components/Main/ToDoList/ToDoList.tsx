@@ -4,13 +4,13 @@ import {Item} from "../../../types";
 import {Action} from "../Main";
 
 type Props = {
-    items: Item[],
-    setItems: Dispatch<SetStateAction<Item[]>>,
-    state: Item[],
+    // items: Item[],
+    // setItems: Dispatch<SetStateAction<Item[]>>,
+    formState: Item[],
     dispatch: Dispatch<Action>
 }
 
-const ToDoList = ({items, setItems, state, dispatch}: Props) => {
+const ToDoList = ({formState, dispatch}: Props) => {
 
 
     return (
@@ -18,16 +18,16 @@ const ToDoList = ({items, setItems, state, dispatch}: Props) => {
             <div className='toDoList_box'>
                 <h2 className='toDoList_box_title'>ToDo List!</h2>
                 <div className='toDoList_box_items'>
-                    {items.length === 0 ? <p className='toDoList_box_items_info'>No todos here</p> :
-                        items.map((item, index) => {
+                    {formState.length === 0 ? <p className='toDoList_box_items_info'>No todos here</p> :
+                        formState.map((item, index) => {
                                 return (
                                     <ToDoListItem
                                         key={item.name}
                                         item={item}
                                         index={index}
-                                        items={items}
-                                        setItems={setItems}
-                                        state={state}
+                                        formState={formState}
+                                        // setItems={setItems}
+                                        // state={state}
                                         dispatch={dispatch}
                                     />
                                 )

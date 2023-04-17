@@ -10,21 +10,21 @@ import {Item} from "../../../types";
 import {Action} from "../Main";
 
 type Props = {
-    items: Item[],
-    setItems: Dispatch<SetStateAction<Item[]>>,
+    // items: Item[],
+    // setItems: Dispatch<SetStateAction<Item[]>>,
     inputEl: MutableRefObject<HTMLInputElement | null>,
-    state: Item[],
+    formState: Item[],
     dispatch: Dispatch<Action>
 }
 
-const getEditedElement = (items: Item[]) => items.find((item) => item.edited);
-const validateName = (items: Item[]) => items.map(item => item.name);
+const getEditedElement = (state: Item[]) => state.find((e) => e.edited);
+const validateName = (state: Item[]) => state.map(e => e.name);
 
-const AddNewTask = ({setItems, items, inputEl, state, dispatch}: Props) => {
+const AddNewTask = ({/*setItems, items,*/ inputEl, formState, dispatch}: Props) => {
     const [error, setError] = useState('');
     const [task, setTask] = useState('');
-    const editElement = getEditedElement(items);
-    const elementNames = validateName(items);
+    const editElement = getEditedElement(formState);
+    const elementNames = validateName(formState);
 
     const handleTaskChange = (e: ChangeEvent<HTMLInputElement>) => {
         setTask(e.target.value)
@@ -49,28 +49,29 @@ const AddNewTask = ({setItems, items, inputEl, state, dispatch}: Props) => {
 
         if (editElement) {
             dispatch({type: 'EDIT', name: task, isEditMode: false})
+
         } else {
             dispatch({type: 'ADD', name: task})
         }
 
 
-        setItems(prevItems => {
-            if (editElement) {
-                const updatedItems = [...prevItems]
-                const index = updatedItems.findIndex((item) => item.name === editElement.name);
-                const editedItem = {...editElement, name: task, edited: false};
-                updatedItems.splice(index, 1, editedItem);
-                return updatedItems
-            }
-
-            return [...prevItems,
-                {
-                    name: task,
-                    done: false,
-                    edited: false,
-                }
-            ]
-        })
+        // setItems(prevItems => {
+        //     if (editElement) {
+        //         const updatedItems = [...prevItems]
+        //         const index = updatedItems.findIndex((item) => item.name === editElement.name);
+        //         const editedItem = {...editElement, name: task, edited: false};
+        //         updatedItems.splice(index, 1, editedItem);
+        //         return updatedItems
+        //     }
+        //
+        //     return [...prevItems,
+        //         {
+        //             name: task,
+        //             done: false,
+        //             edited: false,
+        //         }
+        //     ]
+        // })
         setError('');
         setTask('');
     }

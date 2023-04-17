@@ -3,25 +3,27 @@ import {Item} from "../../../types";
 import {Action} from "../Main";
 
 type Props = {
-    setItems: Dispatch<SetStateAction<Item[]>>,
+    // setItems: Dispatch<SetStateAction<Item[]>>,
     dispatch: Dispatch<Action>
 }
 
-const DeleteTask = ({setItems, dispatch}: Props) => {
+const DeleteTask = ({dispatch}: Props) => {
 
     const deleteAllTasks = () => {
-        setItems(prevItems => {
-            const taskToDelete = [...prevItems]
-            taskToDelete.splice(0, taskToDelete.length)
-            return taskToDelete
-        })
+        dispatch({type: 'DELETE_ALL'})
+        // setItems(prevItems => {
+        //     const taskToDelete = [...prevItems]
+        //     taskToDelete.splice(0, taskToDelete.length)
+        //     return taskToDelete
+        // })
     }
 
     const deleteDoneTask = () => {
-        setItems(prevItems => prevItems.filter((e) => {
-                return !e.done;
-            })
-        )
+        dispatch({type: 'DELETE_DONE'})
+        // setItems(prevItems => prevItems.filter((e) => {
+        //         return !e.done;
+        //     })
+        // )
     }
 
     return (

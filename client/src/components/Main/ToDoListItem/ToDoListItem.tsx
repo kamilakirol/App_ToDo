@@ -3,48 +3,50 @@ import {Item} from "../../../types";
 import {Action} from "../Main";
 
 type Props = {
-    items: Item[],
-    setItems: Dispatch<SetStateAction<Item[]>>
+    // items: Item[],
+    // setItems: Dispatch<SetStateAction<Item[]>>
     item: Item
     index: number
-    state: Item[],
+    formState: Item[],
     dispatch: Dispatch<Action>
 }
 
-const ToDoListItem = ({setItems, item, index, state, dispatch}: Props) => {
+const ToDoListItem = ({item, index, formState, dispatch}: Props) => {
 
     const handleChange = (name: string) => {
-        setItems(prevItems => prevItems.map(item => {
-            if (item.name === name) {
-                return {
-                    ...item,
-                    done: !item.done
-                }
-            }
-            return item
-        }))
+        dispatch({type: 'MARK_DONE', name: name, done: item.done})
+        // setItems(prevItems => prevItems.map(item => {
+        //     if (item.name === name) {
+        //         return {
+        //             ...item,
+        //             done: !item.done
+        //         }
+        //     }
+        //     return item
+        // }))
     }
 
-    const handleSplice = (i: number) => {
-        dispatch({type: 'DELETE', name: item.name})
-        if (index === i)
-            setItems(prevItems => {
-                    const updatedArray = [...prevItems]
-                    updatedArray.splice(index, 1)
-                    return updatedArray
-                }
-            )
+    const handleSplice = (name: string) => {
+        dispatch({type: 'DELETE', name: name})
+        // if (index === i)
+        //     setItems(prevItems => {
+        //             const updatedArray = [...prevItems]
+        //             updatedArray.splice(index, 1)
+        //             return updatedArray
+        //         }
+        //     )s
     };
 
     const handleEdit = (name: string) => {
-        dispatch({type: 'EDIT', name, isEditMode: true})
 
-        setItems(prevItems => prevItems.map(item => {
-            return {
-                ...item,
-                edited: item.name === name ? !item.edited : false
-            }
-        }))
+        dispatch({type: 'EDIT', name: name, isEditMode: !item.edited})
+
+        // setItems(prevItems => prevItems.map(item => {
+        //     return {
+        //         ...item,
+        //         edited: item.name === name ? !item.edited : false
+        //     }
+        // }))
     }
 
     return (
@@ -61,7 +63,7 @@ const ToDoListItem = ({setItems, item, index, state, dispatch}: Props) => {
                 ></input>
                 <i className={!item.edited ? 'fa fa-pencil-square-o' : 'fa fa-window-close'} aria-hidden="true"
                    onClick={() => handleEdit(item.name)}></i>
-                <i className="fa fa-trash" aria-hidden="true" onClick={() => handleSplice(index)}></i>
+                <i className="fa fa-trash" aria-hidden="true" onClick={() => handleSplice(item.name)}></i>
             </div>
         </div>
 

@@ -1,5 +1,5 @@
 export type Item = {
     name: string,
-    done?: boolean,
+    done: boolean,
     edited?: boolean
 }
